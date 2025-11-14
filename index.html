@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator RPP (Discovery & Deeper Learning)</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Library untuk eksport ke Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+        }
+        .title-font {
+            font-family: 'Roboto Slab', serif;
+        }
+        .prose-output h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3a8a; /* dark blue */
+            margin-top: 1.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #93c5fd; /* light blue */
+        }
+        .prose-output h3 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #1f2937;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .prose-output ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        .prose-output p, .prose-output li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .prose-output strong {
+            font-weight: 600;
+            color: #111827;
+        }
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        .rpp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .rpp-table th, .rpp-table td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .rpp-table th {
+            background-color: #eef2ff;
+            font-weight: 700;
+            width: 25%;
+        }
+        .rpp-table td {
+            background-color: #ffffff;
+        }
+        .activity-box {
+            background-color: #f3f4f6;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Styling for generated output font */
+        .generated-font-style {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+        }
+        .generated-font-style h2 {
+            font-family: Arial, sans-serif !important;
+            font-size: 12pt !important;
+        }
+        .generated-font-style h3, .generated-font-style h4 {
+            font-family: Arial, sans-serif !important;
+            font-size: 11pt !important;
+        }
+        .generated-font-style p, 
+        .generated-font-style li, 
+        .generated-font-style td, 
+        .generated-font-style th {
+            font-size: 10pt !important;
+        }
+
+        /* Print styles */
+        @media print {
+            body, #main-container, main {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            body * {
+                visibility: hidden;
+            }
+            #printable-area, #printable-area * {
+                visibility: visible;
+            }
+            #printable-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .prose-output h2 {
+                color: #000000 !important;
+                border-bottom: 2px solid #cccccc !important;
+            }
+            .rpp-table th {
+                background-color: #f0f0f0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div id="main-container" class="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+        
+        <header class="text-center mb-10">
+            <h1 class="title-font text-3xl md:text-4xl font-bold text-gray-900">Generator Perencanaan Pembelajaran</h1>
+            <p class="mt-3 text-lg text-gray-600">Mengintegrasikan Discovery Learning & Pembelajaran Mendalam ✨</p>
+        </header>
+
+        <main class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+            
+            <form id="form-section">
+                <div class="flex items-center gap-4 border-b-2 border-blue-200 pb-4 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <div>
+                        <h2 class="title-font text-xl font-bold text-blue-800">Generator RPP Pembelajaran Mendalam SMA</h2>
+                        <p class="text-gray-600">Model Discovery Learning</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mt-6">
+                    <div>
+                        <label for="teacherName" class="block text-sm font-medium text-gray-700 mb-1">Nama Guru</label>
+                        <input type="text" id="teacherName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Contoh: Budi Santoso">
+                    </div>
+                    <div>
+                        <label for="schoolName" class="block text-sm font-medium text-gray-700 mb-1">Nama Sekolah</label>
+                        <input type="text" id="schoolName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Contoh: SMA Ceria Banyuasin">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Mata Pelajaran</label>
+                        <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Contoh: Biologi">
+                    </div>
+                    <div>
+                        <label for="timeAllocation" class="block text-sm font-medium text-gray-700 mb-1">Alokasi Waktu (JP)</label>
+                        <input type="number" id="timeAllocation" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Contoh: 3">
+                    </div>
+                    <div class="md:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <label for="topic" class="block text-sm font-medium text-gray-700 mb-1">Topik Pembelajaran</label>
+                            <button type="button" id="ide-pemicu-btn" class="text-sm text-blue-600 hover:text-blue-800 font-semibold">✨ Cari Ide Stimulasi</button>
+                        </div>
+                        <input type="text" id="topic" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Contoh: Ekosistem dan Komponennya">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="specificMaterial" class="block text-sm font-medium text-gray-700 mb-1">Materi Spesifik</label>
+                        <textarea id="specificMaterial" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 transition" placeholder="Jelaskan materi yang akan dibahas lebih detail. Contoh: Interaksi antara komponen biotik dan abiotik dalam sebuah ekosistem dan konsep rantai makanan."></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Dimensi Profil Lulusan</label>
+                        <div id="profileDimensions" class="checkbox-grid"></div>
+                    </div>
+                     <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Fokus Kegiatan Inti (untuk 1 RPP)</label>
+                        <div id="coreActivityFocus" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="kegiatanInti" value="lengkap" class="h-4 w-4 text-blue-600" checked><span class="ml-2 text-sm">Siklus Lengkap</span></label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="kegiatanInti" value="memahami" class="h-4 w-4 text-blue-600"><span class="ml-2 text-sm">Fase Memahami</span></label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="kegiatanInti" value="mengaplikasi" class="h-4 w-4 text-blue-600"><span class="ml-2 text-sm">Fase Mengaplikasi</span></label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-blue-50"><input type="radio" name="kegiatanInti" value="merefleksi" class="h-4 w-4 text-blue-600"><span class="ml-2 text-sm">Fase Merefleksi</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center md:flex md:justify-center md:gap-4">
+                    <button type="button" id="generate-btn" class="w-full md:w-auto bg-blue-600 text-white font-bold px-10 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all shadow-md hover:shadow-lg">
+                        Generate Perencanaan Pembelajaran
+                    </button>
+                    <button type="button" id="generate-lkpd-btn" class="w-full md:w-auto bg-indigo-500 text-white font-bold px-10 py-3 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all shadow-md hover:shadow-lg mt-4 md:mt-0 hidden">
+                        ✨ Buat Variasi LKPD
+                    </button>
+                </div>
+            </form>
+            
+            <div id="result-section" class="mt-12 hidden">
+                 <div class="relative border-b-2 border-gray-200 pb-3 mb-6">
+                    <div class="text-center">
+                        <h2 class="title-font text-2xl font-bold text-blue-800 m-0 p-0">PERENCANAAN PEMBELAJARAN MENDALAM</h2>
+                        <p class="font-semibold text-gray-600">Model Discovery Learning</p>
+                    </div>
+                    <div id="button-group" class="absolute top-0 right-0 flex items-center gap-2">
+                        <button id="export-btn" class="bg-teal-600 text-white font-medium px-3 py-2 rounded-lg hover:bg-teal-700 transition text-sm">Spreadsheet</button>
+                        <button id="print-btn" class="bg-green-600 text-white font-medium px-3 py-2 rounded-lg hover:bg-green-700 transition text-sm">Print</button>
+                        <button id="copy-btn" class="bg-blue-600 text-white font-medium px-3 py-2 rounded-lg hover:bg-blue-700 transition text-sm">Copy</button>
+                        <button id="reset-btn" class="bg-slate-600 text-white font-medium px-3 py-2 rounded-lg hover:bg-slate-700 transition text-sm">Reset</button>
+                    </div>
+                </div>
+                <div id="printable-area" class="generated-font-style">
+                    <div id="result-content" class="prose-output mt-4"></div>
+                    <div id="lampiran-placeholder" class="text-center py-12 text-gray-500 border-2 border-dashed rounded-lg mt-8 hidden"></div>
+                    <div id="lampiran-content" class="prose-output mt-8"></div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-10 text-sm text-gray-500">
+            <p>Copyright &copy;2025
+            <a href="https://wa.me/6281271320379" target="_blank" class="inline-flex items-center gap-1 text-green-600 hover:text-green-700 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+                Saran & Kritik
+            </a>
+        </footer>
+    </div>
+
+    <!-- Modal for Ide Pemicu -->
+    <div id="ide-pemicu-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-2xl shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-bold text-gray-900 title-font">✨ Ide Stimulasi Pembelajaran dari AI</h3>
+                <div id="ide-pemicu-content" class="mt-4 px-7 py-3 text-left">
+                    <!-- Loading spinner -->
+                    <div id="ide-pemicu-loading" class="flex justify-center items-center flex-col p-4">
+                        <svg class="animate-spin h-8 w-8 text-blue-600 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <p class="font-semibold text-gray-700">AI sedang mencari ide kreatif...</p>
+                    </div>
+                </div>
+                <div class="items-center px-4 py-3">
+                    <button id="close-modal-btn" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const dimensions = ["Penalaran kritis", "Kreativitas", "Kolaborasi", "Kemandirian", "Komunikasi", "Keimanan dan ketakwaan kepada Tuhan YME", "Kewargaan", "Kesehatan"];
+        const dimensionsContainer = document.getElementById('profileDimensions');
+        dimensions.forEach(dim => {
+            
+            dimensionsContainer.innerHTML += `<label class="flex items-center space-x-3 bg-gray-50 p-3 rounded-lg border hover:bg-gray-100 transition cursor-pointer"><input type="checkbox" name="profileDimension" value="${dim}" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500" ><span class="text-gray-800">${dim}</span></label>`;
+        });
+
+        // Get all button and content elements
+        const generateBtn = document.getElementById('generate-btn');
+        const lkpdBtn = document.getElementById('generate-lkpd-btn');
+        const copyBtn = document.getElementById('copy-btn');
+        const printBtn = document.getElementById('print-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const exportBtn = document.getElementById('export-btn');
+        const resultSection = document.getElementById('result-section');
+        const resultContent = document.getElementById('result-content');
+        const lampiranPlaceholder = document.getElementById('lampiran-placeholder');
+        const lampiranContent = document.getElementById('lampiran-content');
+        const form = document.getElementById('form-section');
+        
+        // Get all form input elements
+        const teacherNameInput = document.getElementById('teacherName');
+        const schoolNameInput = document.getElementById('schoolName');
+        const subjectInput = document.getElementById('subject');
+        const timeAllocationInput = document.getElementById('timeAllocation');
+        const topicInput = document.getElementById('topic');
+        const specificMaterialInput = document.getElementById('specificMaterial');
+
+        // New Gemini Feature Elements
+        const idePemicuBtn = document.getElementById('ide-pemicu-btn');
+        const idePemicuModal = document.getElementById('ide-pemicu-modal');
+        const idePemicuContent = document.getElementById('ide-pemicu-content');
+        const idePemicuLoading = document.getElementById('ide-pemicu-loading');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+
+        // Function to call the Gemini API with exponential backoff
+        async function callGeminiAPI(prompt, retries = 3, delay = 1000) {
+            const apiKey = ""; // Handled by environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429 && retries > 0) { // Throttling
+                        await new Promise(res => setTimeout(res, delay));
+                        return callGeminiAPI(prompt, retries - 1, delay * 2);
+                    }
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                }
+                if (result.promptFeedback && result.promptFeedback.blockReason) {
+                     throw new Error(`Permintaan diblokir: ${result.promptFeedback.blockReason}`);
+                }
+                throw new Error("Respon dari AI tidak valid atau kosong.");
+
+            } catch (error) {
+                if (retries > 0) {
+                    await new Promise(res => setTimeout(res, delay));
+                    return callGeminiAPI(prompt, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+        
+        // Function to get the prompt for core activities based on user selection
+        function getKegiatanIntiPrompt() {
+            const selection = document.querySelector('input[name="kegiatanInti"]:checked').value;
+            
+            const memahamiHtml = `<h4>FASE MEMAHAMI (Berkesadaran) (Alokasi Waktu: ... menit)</h4>
+            <div class="activity-box"><h5>Tahap 1: Stimulation (Pemberian Rangsangan)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas guru memberikan rangsangan)</p></div>
+            <div class="activity-box"><h5>Tahap 2: Problem Statement (Identifikasi Masalah)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas siswa merumuskan pertanyaan)</p></div>`;
+            
+            const mengaplikasiHtml = `<h4>FASE MENGAPLIKASI (Menggembirakan) (Alokasi Waktu: ... menit)</h4>
+            <div class="activity-box"><h5>Tahap 3: Data Collection (Pengumpulan Data)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas siswa mengumpulkan data)</p></div>
+            <div class="activity-box"><h5>Tahap 4: Data Processing (Pengolahan Data)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas siswa mengolah data)</p></div>`;
+
+            const merefleksiHtml = `<h4>FASE MEREFLEKSI (Bermakna) (Alokasi Waktu: ... menit)</h4>
+            <div class="activity-box"><h5>Tahap 5: Verification (Pembuktian)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas siswa memverifikasi temuan)</p></div>
+            <div class="activity-box"><h5>Tahap 6: Generalization (Menarik Kesimpulan)</h5><p><strong>Aktivitas:</strong> (Uraikan aktivitas siswa menyimpulkan)</p></div>`;
+
+            switch(selection) {
+                case 'memahami':
+                    return `<h3>B. KEGIATAN INTI</h3>${memahamiHtml}<p><strong>Catatan:</strong> Fase Mengaplikasi dan Merefleksi akan dilaksanakan pada pertemuan berikutnya.</p>`;
+                case 'mengaplikasi':
+                    return `<h3>B. KEGIATAN INTI</h3>${mengaplikasiHtml}<p><strong>Catatan:</strong> Fase Merefleksi akan dilaksanakan pada pertemuan berikutnya.</p>`;
+                case 'merefleksi':
+                     return `<h3>B. KEGIATAN INTI</h3>${merefleksiHtml}`;
+                default: // 'lengkap'
+                    return `<h3>B. KEGIATAN INTI</h3>${memahamiHtml}${mengaplikasiHtml}${merefleksiHtml}`;
+            }
+        }
+
+        // Main function to generate the lesson plan (RPP)
+        async function handleGenerateClick() {
+            const requiredFields = [teacherNameInput, schoolNameInput, subjectInput, timeAllocationInput, topicInput, specificMaterialInput];
+            if (requiredFields.some(field => !field.value)) {
+                showCustomAlert('Harap isi semua kolom data.');
+                return;
+            }
+            const selectedDimensions = Array.from(document.querySelectorAll('input[name="profileDimension"]:checked')).map(cb => cb.value);
+            if (selectedDimensions.length === 0) {
+                showCustomAlert('Harap pilih minimal satu Dimensi Profil Lulusan.');
+                return;
+            }
+
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = `Memproses RPP...`;
+            resultSection.classList.remove('hidden');
+            resultContent.innerHTML = `<div class="flex justify-center items-center flex-col p-8"><svg class="animate-spin h-8 w-8 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="font-semibold text-lg">AI sedang menyusun RPP, mohon tunggu...</p></div>`;
+            lampiranPlaceholder.classList.add('hidden');
+            lampiranContent.innerHTML = '';
+            lkpdBtn.classList.add('hidden');
+
+            const kegiatanIntiPrompt = getKegiatanIntiPrompt();
+
+            const rppPrompt = `PERINTAH LANGSUNG: Hasilkan RPP yang mengintegrasikan model Discovery Learning dengan prinsip Pembelajaran Mendalam (Berkesadaran, Bermakna, Menggembirakan) dalam format HTML. JANGAN TAMBAHKAN TEKS PEMBUKA. Langsung mulai dengan tag \`<h2>\`.
+
+            Gunakan data berikut:
+            - Guru: ${teacherNameInput.value}, Sekolah: ${schoolNameInput.value}
+            - Mapel: ${subjectInput.value}, Alokasi: ${timeAllocationInput.value} JP
+            - Topik: ${topicInput.value}, Materi Spesifik: ${specificMaterialInput.value}
+            - Profil Lulusan: ${selectedDimensions.join(', ')}
+            
+            Gunakan struktur HTML ini:
+            <h2>1. IDENTITAS & IDENTIFIKASI</h2>
+            <div class="table-container"><table class="rpp-table">
+            <tr><th>Nama Penyusun</th><td>${teacherNameInput.value}</td></tr>
+            <tr><th>Satuan Pendidikan</th><td>${schoolNameInput.value}</td></tr>
+            <tr><th>Mata Pelajaran</th><td>${subjectInput.value}</td></tr>
+            <tr><th>Topik / Fase</th><td>${topicInput.value} / Fase E & F</td></tr>
+            <tr><th>Alokasi Waktu</th><td>${timeAllocationInput.value} JP</td></tr>
+            <tr><th>Karakteristik Peserta Didik</th><td>(Jelaskan secara naratif asumsi pengetahuan awal siswa terkait materi spesifik dan minat mereka.)</td></tr>
+            <tr><th>Dimensi Profil Lulusan</th><td>(Jelaskan secara naratif bagaimana profil ${selectedDimensions.join(', ')} akan dikembangkan.)</td></tr>
+            </table></div>
+
+            <h2>2. DESAIN PEMBELAJARAN</h2>
+            <div class="table-container"><table class="rpp-table">
+            <tr><th>Tujuan Pembelajaran</th><td id="tujuan-pembelajaran-cell">(Rumuskan 2-3 tujuan pembelajaran spesifik yang berfokus pada kemampuan penemuan konsep.)</td></tr>
+            <tr><th>Stimulasi (Discovery)</th><td>(Sajikan fenomena, gambar, atau video yang akan digunakan sebagai rangsangan awal.)</td></tr>
+            <tr><th>Praktik Pedagogis</th><td>Discovery Learning, Pembelajaran Mendalam (Berkesadaran, Bermakna, Menggembirakan), Pembelajaran Berdiferensiasi.</td></tr>
+            <tr><th>Lingkungan Pembelajaran</th><td>Ruang kelas yang mendukung kerja kelompok, laboratorium, atau akses ke sumber belajar digital/fisik.</td></tr>
+            <tr><th>Pemanfaatan Digital</th><td>Platform riset online, aplikasi pengolah data (spreadsheet), aplikasi presentasi.</td></tr>
+            </table></div>
+
+            <h2>3. PENGALAMAN BELAJAR (LANGKAH-LANGKAH PEMBELAJARAN)</h2>
+            <h3>A. KEGIATAN AWAL (Alokasi Waktu: ... menit)</h3>
+            <ul><li><strong>Orientasi & Apersepsi:</strong> (Jelaskan aktivitas guru dan siswa)</li><li><strong>Motivasi & Penyampaian Tujuan:</strong> (Jelaskan aktivitas guru dan siswa)</li></ul>
+            ${kegiatanIntiPrompt}
+            <h3>C. KEGIATAN PENUTUP (Alokasi Waktu: ... menit)</h3>
+            <ul><li><strong>Kesimpulan & Generalisasi:</strong> (Jelaskan aktivitas guru dan siswa dalam menyimpulkan temuan)</li><li><strong>Refleksi & Umpan Balik:</strong> (Jelaskan aktivitas refleksi proses penemuan)</li></ul>
+
+            <h2>4. ASESMEN PEMBELAJARAN</h2>
+            <div class="table-container"><table class="rpp-table">
+            <tr><th>Asesmen Awal (Diagnostik)</th><td>(Jelaskan teknik dan contoh instrumen untuk mengetahui pemahaman awal)</td></tr>
+            <tr><th>Asesmen Proses (Formatif)</th><td>(Jelaskan teknik observasi partisipasi siswa dalam setiap tahap discovery)</td></tr>
+            <tr><th>Asesmen Akhir (Sumatif)</th><td>(Jelaskan teknik untuk mengukur pemahaman konsep yang ditemukan, misal: tes esai, presentasi hasil, atau laporan) <br><br> <button type="button" onclick="generateAssessmentQuestions(this)" class="bg-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-purple-700 transition-all">✨ Buat Contoh Soal</button></td></tr>
+            </table></div>`;
+
+            try {
+                const rppResult = await callGeminiAPI(rppPrompt);
+                resultContent.innerHTML = rppResult;
+                
+                generateBtn.innerHTML = `Membuat Lampiran...`;
+                lampiranPlaceholder.innerHTML = `<div class="flex justify-center items-center flex-col p-8"><svg class="animate-spin h-8 w-8 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="font-semibold text-lg">AI sedang menyusun Lampiran, mohon tunggu...</p></div>`;
+                lampiranPlaceholder.classList.remove('hidden');
+
+                await generateAppendices();
+                lkpdBtn.classList.remove('hidden');
+
+            } catch (error) {
+                resultContent.innerHTML = `<p class="text-red-600 font-semibold p-8">Terjadi kesalahan saat membuat RPP. Silakan coba lagi.<br>Detail: ${error.message}</p>`;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = `Generate Perencanaan Pembelajaran`;
+            }
+        }
+        
+        // Function to generate the initial appendices
+        async function generateAppendices() {
+            const lampiranPrompt = `PERINTAH LANGSUNG: Buatkan lampiran pembelajaran untuk model Discovery Learning dalam format HTML. JANGAN TAMBAHKAN TEKS PEMBUKA. Langsung mulai dengan tag \`<h2>\`.
+
+            Berdasarkan data RPP berikut:
+            - Mapel: ${subjectInput.value}
+            - Topik: ${topicInput.value}
+            - Materi Spesifik: ${specificMaterialInput.value}
+
+            Struktur Lampiran:
+            <h2>5. LAMPIRAN PEMBELAJARAN</h2>
+            <h3>A. Materi Ajar Ringkas</h3>
+            (Buat ringkasan materi kunci tentang "${specificMaterialInput.value}" yang relevan untuk proses penemuan.)
+            <h3>B. Lembar Kerja Peserta Didik (LKPD)</h3>
+            <div class="table-container"><table class="rpp-table">
+            <tr><th colspan="2" style="text-align:center; background-color: #dbeafe;">LEMBAR KERJA PESERTA DIDIK (LKPD) - DISCOVERY LEARNING</th></tr>
+            <tr><th>Mata Pelajaran</th><td>${subjectInput.value}</td></tr>
+            <tr><th>Topik</th><td>${topicInput.value}</td></tr>
+            <tr><th>Tujuan</th><td>(Sebutkan 1-2 tujuan yang relevan dengan proses penemuan di LKPD ini.)</td></tr>
+            <tr><th>Langkah Kerja</th><td>(Berikan instruksi langkah demi langkah yang memandu siswa melalui tahap pengumpulan dan pengolahan data.)</td></tr>
+            <tr><th>Pertanyaan Panduan</th><td>(Berikan 2-3 pertanyaan yang memandu analisis dan penarikan kesimpulan.)</td></tr>
+            </table></div>
+            <h3>C. Instrumen dan Rubrik Penilaian</h3>
+            <h4>Rubrik Penilaian Kinerja Proses Penemuan (Formatif)</h4>
+            <div class="table-container"><table class="rpp-table"><thead style="background-color: #dbeafe;"><tr><th>Kriteria</th><th>Sangat Baik (4)</th><th>Baik (3)</th><th>Cukup (2)</th><th>Perlu Bimbingan (1)</th></tr></thead>
+            <tbody>
+            <tr><th>Merumuskan Masalah</th><td>(Deskripsikan kriteria skor 4)</td><td>(Deskripsikan kriteria skor 3)</td><td>(Deskripsikan kriteria skor 2)</td><td>(Deskripsikan kriteria skor 1)</td></tr>
+            <tr><th>Keterampilan Mengumpulkan & Mengolah Data</th><td>(Deskripsikan kriteria skor 4)</td><td>(Deskripsikan kriteria skor 3)</td><td>(Deskripsikan kriteria skor 2)</td><td>(Deskripsikan kriteria skor 1)</td></tr>
+            <tr><th>Kemampuan Analisis & Pembuktian</th><td>(Deskripsikan kriteria skor 4)</td><td>(Deskripsikan kriteria skor 3)</td><td>(Deskripsikan kriteria skor 2)</td><td>(Deskripsikan kriteria skor 1)</td></tr>
+            <tr><th>Kualitas Generalisasi/Kesimpulan</th><td>(Deskripsikan kriteria skor 4)</td><td>(Deskripsikan kriteria skor 3)</td><td>(Deskripsikan kriteria skor 2)</td><td>(Deskripsikan kriteria skor 1)</td></tr>
+            </tbody></table></div>
+            <h3>D. Glosarium</h3>
+            (Sajikan 3-5 istilah penting terkait topik beserta penjelasannya.)`;
+
+            try {
+                const lampiranResult = await callGeminiAPI(lampiranPrompt);
+                lampiranContent.innerHTML = lampiranResult;
+            } catch (error) {
+                 lampiranContent.innerHTML = `<p class="text-red-600 font-semibold p-8">Gagal membuat lampiran.<br>Detail: ${error.message}</p>`;
+            } finally {
+                lampiranPlaceholder.classList.add('hidden');
+            }
+        }
+
+        // Function to generate a variant LKPD for differentiation
+        async function generateVariantLkpd() {
+            if (!subjectInput.value || !topicInput.value || !specificMaterialInput.value) {
+                showCustomAlert('Harap isi Mata Pelajaran, Topik, dan Materi Spesifik untuk membuat variasi LKPD.');
+                return;
+            }
+
+            lkpdBtn.disabled = true;
+            lkpdBtn.innerHTML = 'Membuat Variasi...';
+
+            const lkpdVariationPrompt = `PERINTAH LANGSUNG: Buatkan SATU variasi Lembar Kerja Peserta Didik (LKPD) untuk Discovery Learning dalam format HTML. JANGAN TAMBAHKAN TEKS PEMBUKA. Langsung mulai dengan tag \`<h3>\`.
+
+            Konteks: Ini adalah LKPD alternatif untuk pembelajaran berdiferensiasi, berdasarkan data berikut:
+            - Mapel: ${subjectInput.value}
+            - Topik: ${topicInput.value}
+            - Materi Spesifik: ${specificMaterialInput.value}
+
+            Tugas Anda: Buat LKPD dengan pendekatan yang BERBEDA dari yang standar. Pilih salah satu pendekatan berikut:
+            1.  **Pendekatan Terbimbing (Guided Discovery):** Berikan lebih banyak petunjuk, tabel data yang sudah terstruktur, atau pertanyaan yang lebih spesifik. Cocok untuk siswa yang memerlukan lebih banyak dukungan.
+            2.  **Pendekatan Terbuka (Open Discovery):** Berikan masalah atau fenomena yang lebih luas dan biarkan siswa merancang sendiri cara pengumpulan dan analisis datanya. Cocok untuk siswa yang sudah mahir.
+            3.  **Pendekatan Berbasis Simulasi Digital:** Rancang tugas yang mengharuskan siswa menggunakan simulasi online (misal: PhET) untuk mengumpulkan data.
+
+            Struktur HTML LKPD Variasi:
+            <h3>B.2. Variasi Lembar Kerja Peserta Didik (LKPD)</h3>
+            <div class="table-container"><table class="rpp-table">
+            <tr><th colspan="2" style="text-align:center; background-color: #e9d5ff;">VARIASI LEMBAR KERJA PESERTA DIDIK (LKPD)</th></tr>
+            <tr><th>Pendekatan Diferensiasi</th><td>(Sebutkan pendekatan yang Anda pilih, misal: Guided Discovery)</td></tr>
+            <tr><th>Mata Pelajaran</th><td>${subjectInput.value}</td></tr>
+            <tr><th>Topik</th><td>${topicInput.value}</td></tr>
+            <tr><th>Tujuan</th><td>(Sebutkan 1-2 tujuan yang disesuaikan dengan pendekatan baru ini.)</td></tr>
+            <tr><th>Langkah Kerja</th><td>(Berikan instruksi langkah demi langkah yang jelas sesuai pendekatan yang dipilih.)</td></tr>
+            <tr><th>Tugas / Produk</th><td>(Jelaskan tugas atau produk akhir yang diharapkan dari siswa.)</td></tr>
+            </table></div>`;
+
+            try {
+                const tempLoading = document.createElement('div');
+                tempLoading.id = 'lkpd-loading';
+                tempLoading.innerHTML = `<div class="flex justify-center items-center flex-col p-8 mt-4 border-2 border-dashed rounded-lg"><svg class="animate-spin h-6 w-6 text-indigo-600 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><p class="font-semibold text-indigo-800">AI sedang membuat LKPD variasi...</p></div>`;
+                lampiranContent.appendChild(tempLoading);
+
+                const lkpdResult = await callGeminiAPI(lkpdVariationPrompt);
+                
+                const existingLoading = document.getElementById('lkpd-loading');
+                if(existingLoading) existingLoading.remove();
+                
+                lampiranContent.innerHTML += lkpdResult;
+
+            } catch (error) {
+                 const errorMsg = document.createElement('div');
+                 errorMsg.innerHTML = `<p class="text-red-600 font-semibold p-4 mt-4">Gagal membuat variasi LKPD.<br>Detail: ${error.message}</p>`;
+                 lampiranContent.appendChild(errorMsg);
+            } finally {
+                lkpdBtn.disabled = false;
+                lkpdBtn.innerHTML = '✨ Buat Variasi LKPD';
+            }
+        }
+
+        // ✨ GEMINI FEATURE: Generate Stimulation Ideas
+        async function generateIdePemicu() {
+            if (!topicInput.value || !specificMaterialInput.value) {
+                showCustomAlert('Harap isi "Topik Pembelajaran" dan "Materi Spesifik" terlebih dahulu untuk mendapatkan ide.');
+                return;
+            }
+            idePemicuModal.classList.remove('hidden');
+            idePemicuLoading.style.display = 'flex';
+            idePemicuContent.innerHTML = ''; // Clear previous content
+            idePemicuContent.appendChild(idePemicuLoading);
+
+
+            const prompt = `Berikan 3 ide stimulasi (rangsangan) yang menarik dan relevan untuk memulai pembelajaran Discovery Learning di SMA dengan topik "${topicInput.value}" dan materi spesifik "${specificMaterialInput.value}". Setiap ide harus berupa fenomena, video, gambar, atau pertanyaan pemantik yang bisa memancing rasa ingin tahu siswa dan mengarah pada identifikasi masalah. Sajikan dalam format HTML yang rapi menggunakan elemen <ol> dan <li>.`;
+
+            try {
+                const result = await callGeminiAPI(prompt);
+                idePemicuContent.innerHTML = result;
+            } catch (error) {
+                idePemicuContent.innerHTML = `<p class="text-red-600">Gagal mendapatkan ide. Silakan coba lagi. Error: ${error.message}</p>`;
+            } finally {
+                idePemicuLoading.style.display = 'none';
+            }
+        }
+
+        // ✨ GEMINI FEATURE: Generate Assessment Questions
+        async function generateAssessmentQuestions(buttonElement) {
+            const tujuanCell = document.getElementById('tujuan-pembelajaran-cell');
+            if (!tujuanCell || !tujuanCell.innerText) {
+                showCustomAlert('Tujuan pembelajaran tidak ditemukan atau kosong.');
+                return;
+            }
+            
+            buttonElement.disabled = true;
+            buttonElement.innerText = 'Membuat soal...';
+
+            const tujuanText = tujuanCell.innerText;
+            const prompt = `Berdasarkan tujuan pembelajaran berikut: "${tujuanText}" dan materi "${specificMaterialInput.value}", buatlah 3 contoh soal asesmen sumatif yang bervariasi (misalnya 1 pilihan ganda, 1 esai singkat, 1 tugas kinerja) untuk siswa SMA yang telah melalui proses Discovery Learning. Sajikan dalam format HTML yang terstruktur dengan baik menggunakan <h4> untuk jenis soal dan <p> atau <ol> untuk soalnya.`;
+
+            const resultContainer = document.createElement('div');
+            resultContainer.className = 'mt-4 p-4 border-t-2 border-purple-200';
+            resultContainer.innerHTML = `<div class="flex items-center"><svg class="animate-spin h-5 w-5 text-purple-600 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>AI sedang menyusun soal...</span></div>`;
+            buttonElement.parentElement.appendChild(resultContainer);
+
+            try {
+                const result = await callGeminiAPI(prompt);
+                resultContainer.innerHTML = result;
+                buttonElement.remove(); // Remove button after successful generation
+            } catch (error) {
+                resultContainer.innerHTML = `<p class="text-red-600">Gagal membuat soal. Error: ${error.message}</p>`;
+                buttonElement.disabled = false;
+                buttonElement.innerText = '✨ Buat Contoh Soal';
+            }
+        }
+
+
+        // Function to handle printing
+        function handlePrintClick() {
+            window.print();
+        }
+
+        // Function to handle copying content as plain text
+        function handleCopyClick() {
+            const printableArea = document.getElementById('printable-area');
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = printableArea.innerHTML;
+            
+            // Remove buttons from the copy content
+            tempDiv.querySelectorAll('button').forEach(btn => btn.remove());
+
+            tempDiv.querySelectorAll('h2').forEach(el => el.innerText = `\n\n--- ${el.innerText.toUpperCase()} ---\n`);
+            tempDiv.querySelectorAll('h3').forEach(el => el.innerText = `\n${el.innerText}\n`);
+            tempDiv.querySelectorAll('h4').forEach(el => el.innerText = `\n${el.innerText}\n`);
+            tempDiv.querySelectorAll('li').forEach(el => el.innerText = `\n- ${el.innerText}`);
+            tempDiv.querySelectorAll('.activity-box').forEach(box => {
+                const title = box.querySelector('h5')?.innerText || '';
+                const content = box.querySelector('p')?.innerText || '';
+                box.innerText = `\n[${title}]\n${content}\n`;
+            });
+            
+            tempDiv.querySelectorAll('.rpp-table').forEach(table => {
+                let tableText = '\n';
+                table.querySelectorAll('tr').forEach(row => {
+                    const th = row.querySelector('th');
+                    const td = row.querySelector('td');
+                    // Specific handling for simple key-value rows
+                    if (th && td && row.cells.length === 2 && th.colSpan === 1) {
+                        tableText += `${th.innerText.trim()}: ${td.innerText.trim()}\n`;
+                    } else { // Generic handler for other table rows (headers, complex data)
+                        let rowText = Array.from(row.cells).map(cell => cell.innerText.trim()).join('\t|\t');
+                        tableText += `${rowText}\n`;
+                    }
+                });
+                const container = table.closest('.table-container') || table;
+                container.innerText = tableText;
+            });
+
+            const textArea = document.createElement('textarea');
+            textArea.value = tempDiv.innerText.trim().replace(/\n\n\n/g, '\n\n'); // Clean up extra newlines
+            textArea.style.position = 'absolute';
+            textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                copyBtn.innerText = 'Disalin!';
+                setTimeout(() => { copyBtn.innerText = 'Copy'; }, 2000);
+            } catch (err) {
+                showCustomAlert('Gagal menyalin teks.');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Function to handle exporting to spreadsheet
+        function handleExportClick() {
+            const wb = XLSX.utils.book_new();
+            const printableArea = document.getElementById('printable-area').cloneNode(true);
+            
+            const cleanText = (element) => element ? element.innerText.trim() : '';
+
+            const rppData = [];
+            printableArea.querySelectorAll('#result-content h2, #result-content .rpp-table, #result-content h3, #result-content h4, #result-content ul, #result-content .activity-box').forEach(el => {
+                if (el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4') {
+                    rppData.push([el.innerText.toUpperCase(), '']);
+                } else if (el.tagName === 'TABLE') {
+                    el.querySelectorAll('tr').forEach(row => {
+                        const th = row.querySelector('th');
+                        const td = row.querySelector('td');
+                        if (th && td) {
+                            rppData.push([cleanText(th), cleanText(td)]);
+                        }
+                    });
+                } else if (el.tagName === 'UL') {
+                     el.querySelectorAll('li').forEach(li => {
+                         rppData.push(['- ' + cleanText(li), '']);
+                     });
+                } else if (el.classList.contains('activity-box')) {
+                    const title = el.querySelector('h5');
+                    rppData.push(['', cleanText(title)]);
+                    el.querySelectorAll('p').forEach(p => {
+                        rppData.push(['', cleanText(p)]);
+                    });
+                }
+            });
+            const ws1 = XLSX.utils.aoa_to_sheet(rppData);
+            ws1['!cols'] = [{ wch: 40 }, { wch: 80 }];
+            XLSX.utils.book_append_sheet(wb, ws1, 'RPP Utama');
+
+            const lampiranData = [];
+            printableArea.querySelectorAll('#lampiran-content h2, #lampiran-content h3, #lampiran-content h4, #lampiran-content p, #lampiran-content .rpp-table').forEach(el => {
+                if (el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4') {
+                    lampiranData.push([el.innerText.toUpperCase(), '']);
+                } else if (el.tagName === 'P') {
+                    lampiranData.push([cleanText(el), '']);
+                } else if (el.tagName === 'TABLE') {
+                    const tableArray = [];
+                    el.querySelectorAll('tr').forEach(row => {
+                        const rowData = [];
+                        row.querySelectorAll('th, td').forEach(cell => {
+                            rowData.push(cleanText(cell));
+                        });
+                        tableArray.push(rowData);
+                    });
+                    tableArray.forEach(row => lampiranData.push(row));
+                }
+                lampiranData.push(['', '']); 
+            });
+            const ws2 = XLSX.utils.aoa_to_sheet(lampiranData);
+            ws2['!cols'] = [{ wch: 40 }, { wch: 80 }];
+            XLSX.utils.book_append_sheet(wb, ws2, 'Lampiran');
+            
+            const teacher = teacherNameInput.value.replace(/ /g, '_') || 'Guru';
+            const topic = topicInput.value.replace(/ /g, '_') || 'Topik';
+            const fileName = `RPP_Pembelajaran_Mendalam_${teacher}_${topic}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+        }
+
+        // Function to reset the entire form and results
+        function handleResetClick() {
+            form.reset();
+            resultSection.classList.add('hidden');
+            resultContent.innerHTML = '';
+            lampiranContent.innerHTML = '';
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = `Generate Perencanaan Pembelajaran`;
+            lkpdBtn.classList.add('hidden');
+            idePemicuModal.classList.add('hidden');
+        }
+
+        // Function to show a custom alert modal
+        function showCustomAlert(message) {
+            let alertModal = document.getElementById('custom-alert-modal');
+            if (!alertModal) {
+                alertModal = document.createElement('div');
+                alertModal.id = 'custom-alert-modal';
+                alertModal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50';
+                alertModal.innerHTML = `
+                    <div class="relative mx-auto p-5 border w-full max-w-sm shadow-lg rounded-md bg-white">
+                        <div class="mt-3 text-center">
+                            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
+                                <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            </div>
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Perhatian</h3>
+                            <div class="mt-2 px-7 py-3">
+                                <p id="custom-alert-message" class="text-sm text-gray-500">${message}</p>
+                            </div>
+                            <div class="items-center px-4 py-3">
+                                <button id="close-alert-btn" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                                    Mengerti
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+                document.body.appendChild(alertModal);
+                alertModal.querySelector('#close-alert-btn').addEventListener('click', () => {
+                    alertModal.remove();
+                });
+            }
+            alertModal.querySelector('#custom-alert-message').innerText = message;
+        }
+        
+        // Add event listeners to all buttons
+        generateBtn.addEventListener('click', handleGenerateClick);
+        lkpdBtn.addEventListener('click', generateVariantLkpd);
+        printBtn.addEventListener('click', handlePrintClick);
+        copyBtn.addEventListener('click', handleCopyClick);
+        exportBtn.addEventListener('click', handleExportClick);
+        resetBtn.addEventListener('click', handleResetClick);
+        idePemicuBtn.addEventListener('click', generateIdePemicu);
+        closeModalBtn.addEventListener('click', () => idePemicuModal.classList.add('hidden'));
+
+    </script>
+</body>
+</html>
